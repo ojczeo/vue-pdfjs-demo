@@ -70,43 +70,12 @@ export default {
     drawPage() {
       // if (this.renderTask) return;
       if (this.page) {
-          this.src = this.page.page.src;
+          this.src = this.page.page.src.replace('/1500/2121', '/150/212');
           this.$emit('thumbnail-rendered', {
               page: this.page,
               text: `Rendered thumbnail ${this.pageNumber}`,
           });
       }
-      // const { viewport } = this;
-      // const canvas = document.createElement('canvas')
-      // const canvasContext = canvas.getContext('2d')
-      // const renderContext = { canvasContext, viewport };
-      // canvas.height = viewport.height;
-      // canvas.width = viewport.width;
-      //
-      // this.renderTask = this.page.render(renderContext);
-      // this.renderTask
-      //   .then(() => {
-      //     this.src = canvas.toDataURL();
-      //
-      //     // Zeroing the width and height causes Firefox to release graphics
-      //     // resources immediately, which can greatly reduce memory consumption.
-      //     canvas.width = 0;
-      //     canvas.height = 0;
-      //   })
-      //   .then(() => {
-      //     this.$emit('thumbnail-rendered', {
-      //       page: this.page,
-      //       text: `Rendered thumbnail ${this.pageNumber}`,
-      //     });
-      //    })
-      //   .catch(response => {
-      //     // this.destroyRenderTask();
-      //     this.$emit('thumbnail-errored', {
-      //       response,
-      //       page: this.page,
-      //       text: `Failed to render thumbnail ${this.pageNumber}`,
-      //     });
-      //   });
     },
 
     // destroyPage(_newPage, page) {
