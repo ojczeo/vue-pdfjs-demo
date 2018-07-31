@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-
+    <button
+      @click="addPages">
+      Fetch new pages
+    </button>
     <PDFViewer
-      v-bind="{url}"
+      v-bind="{pages}"
       @document-errored="onDocumentErrored"
       >
       <PDFUploader
@@ -20,6 +23,10 @@
 import PDFUploader from './components/PDFUploader.vue'
 import PDFViewer from './components/PDFViewer.vue'
 
+function getRandomNumber(low, high) {
+    return Math.floor(Math.random() * (high - low + 1)) + low;
+}
+
 export default {
   name: 'app',
 
@@ -30,17 +37,33 @@ export default {
 
   data() {
     return {
-      url: process.env.VUE_APP_PDF_URL,
+      pages: [
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100),
+          'https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100)
+      ],
       documentError: undefined,
       enableUploader: process.env.VUE_APP_UPLOAD_ENABLED === 'true',
     };
   },
 
   methods: {
-    urlUpdated(url) {
-      this.documentError = undefined;
-      this.url = url;
+    addPages() {
+      for (let i = 1;i <= 10; i++) {
+        this.pages.push('https://picsum.photos/1500/2121?photo=' + getRandomNumber(0, 100))
+      }
     },
+    // urlUpdated(url) {
+    //   this.documentError = undefined;
+    //   // this.url = url;
+    // },
     onDocumentErrored(e) {
       this.documentError = e.text;
     },

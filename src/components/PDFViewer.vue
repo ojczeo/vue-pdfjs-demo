@@ -23,7 +23,7 @@
 
     <PDFData
       class="pdf-viewer__main"
-      :url="url"
+      :pagesArray="pages"
       @page-count="updatePageCount"
       @page-focus="updateCurrentPage"
       @document-rendered="onDocumentRendered"
@@ -77,23 +77,23 @@ export default {
   },
 
   props: {
-    url: String,
+    pages: Array,
   },
 
   data() {
     return {
       scale: undefined,
-      optimalScale: undefined,
+      optimalScale: 1,
       fit: undefined,
       currentPage: 1,
-      pageCount: undefined,
+      pageCount: this.pages && this.pages.length ? this.pages.length : undefined,
       isPreviewEnabled: false,
     };
   },
 
   methods: {
     onDocumentRendered() {
-      this.$emit('document-errored', this.url);
+      this.$emit('document-errored', this.pages);
     },
 
     onDocumentErrored(e) {
@@ -124,7 +124,7 @@ export default {
   },
 
   watch: {
-    url() {
+    pages() {
       this.currentPage = undefined;
     },
   },

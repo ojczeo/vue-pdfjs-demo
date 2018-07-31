@@ -89,7 +89,7 @@ export default {
           });
          })
         .catch(response => {
-          this.destroyRenderTask();
+          // this.destroyRenderTask();
           this.$emit('page-errored', {
             response,
             page: this.page,
@@ -102,30 +102,30 @@ export default {
       this.$parent.$emit('update-visibility');
     },
 
-    destroyPage(page) {
+    // destroyPage(page) {
       // PDFPageProxy#_destroy
       // https://mozilla.github.io/pdf.js/api/draft/PDFPageProxy.html
-      if (page) page._destroy();
+      // if (page) page._destroy();
 
-      this.destroyRenderTask();
-    },
+      // this.destroyRenderTask();
+    // },
 
-    destroyRenderTask() {
-      if (!this.renderTask) return;
-
-      // RenderTask#cancel
-      // https://mozilla.github.io/pdf.js/api/draft/RenderTask.html
-      this.renderTask.cancel();
-      delete this.renderTask;
-    },
+    // destroyRenderTask() {
+    //   if (!this.renderTask) return;
+    //
+    //   // RenderTask#cancel
+    //   // https://mozilla.github.io/pdf.js/api/draft/RenderTask.html
+    //   // this.renderTask.cancel();
+    //   delete this.renderTask;
+    // },
   },
 
   watch: {
     scale: 'updateVisibility',
 
-    page(_newPage, oldPage) {
-      this.destroyPage(oldPage);
-    },
+    // page(_newPage, oldPage) {
+    //   this.destroyPage(oldPage);
+    // },
 
     isElementFocused(isElementFocused) {
       if (isElementFocused) this.focusPage();
@@ -146,9 +146,9 @@ export default {
     log(`Page ${this.pageNumber} mounted`);
   },
 
-  beforeDestroy() {
-    this.destroyPage(this.page);
-  },
+  // beforeDestroy() {
+  //   this.destroyPage(this.page);
+  // },
 
   render(h) {
     const {canvasAttrs: attrs} = this;

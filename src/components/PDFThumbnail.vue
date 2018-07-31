@@ -94,7 +94,7 @@ export default {
           });
          })
         .catch(response => {
-          this.destroyRenderTask();
+          // this.destroyRenderTask();
           this.$emit('thumbnail-errored', {
             response,
             page: this.page,
@@ -103,22 +103,22 @@ export default {
         });
     },
 
-    destroyPage(_newPage, page) {
-      // PDFPageProxy#_destroy
-      // https://mozilla.github.io/pdf.js/api/draft/PDFPageProxy.html
-      if (page) page._destroy();
-
-      this.destroyRenderTask();
-    },
-
-    destroyRenderTask() {
-      if (!this.renderTask) return;
-
-      // RenderTask#cancel
-      // https://mozilla.github.io/pdf.js/api/draft/RenderTask.html
-      this.renderTask.cancel();
-      delete this.renderTask;
-    },
+    // destroyPage(_newPage, page) {
+    //   // PDFPageProxy#_destroy
+    //   // https://mozilla.github.io/pdf.js/api/draft/PDFPageProxy.html
+    //   // if (page) page._destroy();
+    //
+    //   this.destroyRenderTask();
+    // },
+    //
+    // destroyRenderTask() {
+    //   if (!this.renderTask) return;
+    //
+    //   // RenderTask#cancel
+    //   // https://mozilla.github.io/pdf.js/api/draft/RenderTask.html
+    //   // this.renderTask.cancel();
+    //   delete this.renderTask;
+    // },
 
     updateVisibility() {
       this.$parent.$emit('update-visibility');
@@ -126,7 +126,7 @@ export default {
   },
 
   watch: {
-    page: 'destroyPage',
+    // page: 'destroyPage',
     src: 'updateVisibility',
     scale: 'updateVisibility',
 
@@ -139,9 +139,9 @@ export default {
     log(`Page ${this.pageNumber} mounted`);
   },
 
-  beforeDestroy() {
-    this.destroyPage(undefined, this.page);
-  },
+  // beforeDestroy() {
+  //   this.destroyPage(undefined, this.page);
+  // },
 }
 </script>
 
