@@ -68,7 +68,7 @@ export default {
   watch: {
       pagesArray(val, oldVal) {
           if (!val) return;
-          if (oldVal) Object.assign(this, getDefaults());
+          // if (oldVal) Object.assign(this, getDefaults());
           this.$emit('page-count', this.pageCount);
           this.fetchPages();
       },
@@ -91,7 +91,7 @@ export default {
       const startIndex = this.pages.length;
       if (this.cursor > startIndex) return;
 
-      const startPage = startIndex + 1;
+      const startPage = startIndex;
       const endPage = Math.min(Math.max(currentPage, startIndex + BUFFER_LENGTH), this.pageCount);
       this.cursor = endPage;
 
@@ -101,7 +101,7 @@ export default {
           const deleteCount = 0;
           const mappedPages = pages.map((img, index) => {
               return {
-                  pageNumber: index,
+                  pageNumber: index + 1 + startIndex,
                   page: img,
                   getViewport() {
                       return new PageViewport({
